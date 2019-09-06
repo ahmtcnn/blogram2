@@ -12,9 +12,20 @@
                 <li><a href="{% url 'pages:index' %}">Home</a></li>
                 <li><a href="{% url 'articles:index' %}">Articles</a></li>
                 <li><a href="{% url 'pages:about' %}">About</a></li>
+                {% if not user.is_authenticated %}
                 <li><a href="{% url 'accounts:login' %}">Login</a></li>
                 <li><a href="{% url 'accounts:register' %}">Register</a></li>
+                {% else  %}
                 <li><a href="{% url 'accounts:dashboard' %}">Dashboard</a></li>
+                <li><a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+                        <i class="fas fa-sign-out-alt">Logout</i>
+                      </a>
+                      <form action="{% url 'accounts:logout' %}" id="logout" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden">
+                      </form></li>
+                {% endif %}
+
                 
             </ul><!-- main-menu -->
 
