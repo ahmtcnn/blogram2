@@ -38,7 +38,6 @@ def register(request):
         password = request.POST['password']
         password2 = request.POST['password2']
 
-        print(username,email,password,password2)
 
         # Check if password match
         if password == password2:

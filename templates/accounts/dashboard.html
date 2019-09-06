@@ -3,220 +3,182 @@
 
 
 {% block content %}
+<br>
+<br>
 
-<div class="container">
-        <div class="row my-2">
-            <div class="col-lg-8 order-lg-2">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
-                    </li>
-                </ul>
-                <div class="tab-content py-4">
-                    <div class="tab-pane active" id="profile">
-                        <h5 class="mb-3">User Profile</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>About</h6>
-                                <p>
-                                    Web Designer, UI/UX Engineer
-                                </p>
-                                <h6>Hobbies</h6>
-                                <p>
-                                    Indie music, skiing and hiking. I love the great outdoors.
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Recent badges</h6>
-                                <a href="#" class="badge badge-dark badge-pill">html5</a>
-                                <a href="#" class="badge badge-dark badge-pill">react</a>
-                                <a href="#" class="badge badge-dark badge-pill">codeply</a>
-                                <a href="#" class="badge badge-dark badge-pill">angularjs</a>
-                                <a href="#" class="badge badge-dark badge-pill">css3</a>
-                                <a href="#" class="badge badge-dark badge-pill">jquery</a>
-                                <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
-                                <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
-                                <hr>
-                                <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                                <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                                <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
-                            </div>
-                            <div class="col-md-12">
-                                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
-                                <table class="table table-sm table-hover table-striped">
-                                    <tbody>                                    
-                                        <tr>
-                                            <td>
-                                                <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+<meta charset="utf-8">
+    <!--  This file has been downloaded from https://bootdey.com  -->
+    <!--  All snippets are MIT license https://bootdey.com/license -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/mystyle.css' %}">
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="user-profile">
+            <div class="profile-header-background"><img src="http://demo.thedevelovers.com/dashboard/queenadmin-1.2/assets/img/city.jpg" alt="Profile Header Background"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-info-left">
+                        <div class="text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle">
+                            <h2>Jack Bay</h2>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="#" class="btn btn-success btn-block"><i class="fa fa-plus-round"></i> Follow</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#" class="btn btn-primary btn-block"><i class="fa fa-android-mail"></i> Message</a>
+                                </div>
                             </div>
                         </div>
-                        <!--/row-->
-                    </div>
-                    <div class="tab-pane" id="messages">
-                        <div class="alert alert-info alert-dismissable">
-                            <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                        <div class="section">
+                            <h3>About Me</h3>
+                            <p>Energistically administrate 24/7 portals and enabled catalysts for change. Objectively revolutionize client-centered e-commerce via covalent scenarios. Continually envisioneer.</p>
                         </div>
-                        <table class="table table-hover table-striped">
-                            <tbody>                                    
-                                <tr>
-                                    <td>
-                                       <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
-                                    </td>
-                                </tr>
-                            </tbody> 
-                        </table>
+                        <div class="section">
+                            <h3>Statistics</h3>
+                            <p><span class="badge">332</span> Following</p>
+                            <p><span class="badge">124</span> Followers</p>
+                            <p><span class="badge">620</span> Likes</p>
+                        </div>
+                        <div class="section">
+                            <h3>Social</h3>
+                            <ul class="list-unstyled list-social">
+                                <li><a href="#"><i class="fa fa-twitter"></i> @jackbay</a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i> Jack Bay</a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i> jackdribs</a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i> Jack Bay</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="tab-pane" id="edit">
-                        <form role="form">
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="Jane">
+                </div>
+                <div class="col-md-8">
+                    <div class="profile-info-right">
+                            <ul class="nav nav-tabs">
+                                    <li><a href="#a" data-toggle="tab">Blogs</a></li>
+                                    <li><a href="#b" data-toggle="tab">Settings</a></li>
+                                    <li><a href="#c" data-toggle="tab">Followers</a></li>
+                                    <li><a href="#d" data-toggle="tab">Followed</a></li>
+                                    <li><a href="#e" data-toggle="tab">Create Article</a></li>
+                                 </ul>
+                                 
+                                 <div class="tab-content">
+                                    <div class="tab-pane active" id="a">
+                                        
+                                            <div class="card-deck">
+                                                    <div class="card">
+                                                      <img class="card-img-top" src="{% static 'images/marion-michele-330691.jpg' %}" alt="Card image cap">
+                                                      <div class="card-body">
+                                                        <h5 class="card-title">Card title</h5>
+                                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <img class="card-img-top" src="{% static 'images/marion-michele-330691.jpg' %}" alt="Card image cap">
+                                                      <div class="card-body">
+                                                        <h5 class="card-title">Card title</h5>
+                                                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card">
+                                                      <img class="card-img-top" src="{% static 'images/marion-michele-330691.jpg' %}" alt="Card image cap">
+                                                      <div class="card-body">
+                                                        <h5 class="card-title">Card title</h5>
+                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                    
+                                    
+                                    </div>
+                                    
+                                    <div class="tab-pane" id="b">
+
+                                            <form>
+                                                    <div class="form-group">
+                                                      <label for="exampleInputEmail1">Email address</label>
+                                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="exampleInputPassword1">Password</label>
+                                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="exampleInputPassword1">Password</label>
+                                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                      <label for="exampleInputPassword1">Password</label>
+                                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                      <label for="exampleInputPassword1">Password</label>
+                                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                    </div>
+                                                    <div class="form-group form-check">
+                                                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+
+
+                                    </div>
+                                    <div class="tab-pane" id="c">CCC</div>
+                                    <div class="tab-pane" id="d">DDD</div>
+
+                                    <div class="tab-pane" id="e">
+
+                                        <form action="{% url 'articles:save_article' %}" method="POST">
+                                          {% csrf_token %}
+
+                                                <div class="form-group">
+                                                  <label for="exampleInputPassword1">Title</label>
+                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="title" placeholder="Title">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleInputPassword1">Description</label>
+                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="description" placeholder="Description">
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <label for="exampleInputPassword1">Topic</label>
+                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="topic" placeholder="Topic">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea3">Article</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea3" name="article" rows="7"></textarea>
+                                                  </div>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+
+
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="Bishop">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="email" value="email@gmail.com">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Company</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="url" value="">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="" placeholder="Street">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                <div class="col-lg-6">
-                                    <input class="form-control" type="text" value="" placeholder="City">
-                                </div>
-                                <div class="col-lg-3">
-                                    <input class="form-control" type="text" value="" placeholder="State">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Time Zone</label>
-                                <div class="col-lg-9">
-                                    <select id="user_time_zone" class="form-control" size="0">
-                                        <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                        <option value="Alaska">(GMT-09:00) Alaska</option>
-                                        <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                        <option value="Arizona">(GMT-07:00) Arizona</option>
-                                        <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                        <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                        <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                        <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="janeuser">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="password" value="11111122333">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="password" value="11111122333">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                <div class="col-lg-9">
-                                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                                    <input type="button" class="btn btn-primary" value="Save Changes">
-                                </div>
-                            </div>
-                        </form>
+
+                                 </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 order-lg-1 text-center">
-                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-                <h6 class="mt-2">Upload a different photo</h6>
-                <label class="custom-file">
-                    <input type="file" id="file" class="custom-file-input">
-                    <span class="custom-file-control">Choose file</span>
-                </label>
-            </div>
         </div>
     </div>
+
+    
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        
+    </script>
 
 
 

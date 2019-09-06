@@ -5,21 +5,24 @@ from accounts.models import CustomUser
 
 # Create your models here.
 
+def upload_to(instance, filename):
+    return 'images/%s/%s' % (instance.user.user.username, filename)
 
 class Article(models.Model):
     writer          = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    article         = models.TextField(blank = True)
     title           = models.CharField(max_length=100)
     topic           = models.CharField(max_length=200)
     description     = models.TextField(blank = True)
     publish_date    = models.DateField(default=datetime.now)
-    like_count      = models.IntegerField()
-    dislike_count   = models.IntegerField()
+    like_count      = models.IntegerField(null=True, blank=True)
+    dislike_count   = models.IntegerField(null=True, blank=True)
     who_liked       = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
     who_disliked    = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
     is_edited       = models.BooleanField(default=False)
     last_edited     = models.DateField(default=datetime.now)
-    seen_count      = models.IntegerField()
-    main_photo      = models.ImageField(upload_to='photos/%Y/%m/%d/',blank=True)
+    seen_count      = models.IntegerField(default=0)
+    main_photo      = models.ImageField(upload_to=upload_to,blank=True)
     photo_1         = models.ImageField(upload_to='photos/%Y/%m/%d/',blank=True)
     photo_2         = models.ImageField(upload_to='photos/%Y/%m/%d/',blank=True)
     photo_3         = models.ImageField(upload_to='photos/%Y/%m/%d/',blank=True)
