@@ -157,8 +157,21 @@
 
 
                                     </div>
-                                    <div class="tab-pane" id="c">test</div>
-                                    <div class="tab-pane" id="d">test</div>
+                                    <div class="tab-pane" id="c">
+
+                                      {% for follower in follower_list %}
+                                        <li>{{follower}}</li><br>
+                                      {% endfor %}
+
+
+                                    </div>
+                                    <div class="tab-pane" id="d">
+
+                                      {% for followed in followed_list %}
+                                        <li>{{followed}}</li><br>
+                                      {% endfor %}
+
+                                    </div>
 
                                     <div class="tab-pane" id="e">
 
@@ -183,6 +196,10 @@
                                                     <label for="exampleFormControlTextarea3">Article</label>
                                                     <textarea class="form-control" id="exampleFormControlTextarea3" name="article" rows="7"></textarea>
                                                   </div>
+                                                  <div class="form-group"
+                                                  <span>Add photo</span>
+                                                  <input type="file">
+                                                </div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
 

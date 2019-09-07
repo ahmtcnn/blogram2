@@ -4,6 +4,30 @@
 {% block content %}
 
 
+<div class="slider display-table center-text">
+    <h1 class="title display-table-cell"><b>BLOGRAM</b></h1>
+</div><!-- slider -->
+
+<section class="blog-area section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-2 col-md-0"></div>
+            <div class="col-lg-8 col-md-12">
+                <div class="post-wrapper">
+
+                    <h3 class="title"><a href="#"><b>{{article.title}}</b></a></h3>
+
+                    {{article.article}}
+
+
+                </div><!-- post-wrapper -->
+            </div><!-- col-sm-8 col-sm-offset-2 -->
+        </div><!-- row -->
+
+    </div><!-- container -->
+</section><!-- section -->
+
 
 
 {% endblock %}

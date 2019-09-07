@@ -48,6 +48,7 @@ def dashboard(request):
 
         'user':user,
         'follower_list':followers_list,
+        'followed_list':followed_list,
         'articles_list':articles_list,
         'liked_articles':liked_articles_list,
         'disliked_articles':disliked_articles_list,

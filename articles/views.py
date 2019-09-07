@@ -5,10 +5,25 @@ from accounts.models import CustomUser
 # Create your views here.
 
 def index(request):
-    return render(request, 'articles/articles.html')
+    # We fetch the article objects to print them on index page
+    articles = Article.objects.all()
 
-def article(request):
-    return render(request, 'articles/article.html')
+    context = {
+        'articles':articles,
+    }
+
+    return render(request, 'articles/articles.html',context)
+
+def article(request, article_id):
+
+    article = Article.objects.get(id=article_id)
+
+    context = {
+
+        'article':article,
+    }
+
+    return render(request, 'articles/article.html',context)
 
 def search(request):
     return render(request, 'articles/search.html')
