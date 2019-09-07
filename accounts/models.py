@@ -4,6 +4,9 @@ from django.db import models
 
 # Create your models here.
 
+def upload_to(instance, filename):
+    return 'profile_photos/%s/%s' % (instance.user.user.username, filename)
+
 class CustomUser(AbstractUser):
     birth_date          = models.DateField(null=True, blank=True)
     blogname		    = models.CharField(max_length=30,null=True, blank=True)
@@ -14,7 +17,7 @@ class CustomUser(AbstractUser):
     followed            = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
     liked_articles      = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
     disliked_articles   = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
-    photo               = models.ImageField(upload_to='profile_photos/%Y/%m/%d/',null=True, blank=True)
+    photo               = models.ImageField(upload_to=upload_to,null=True, blank=True)
 
     def __str__(self):
         return self.email
