@@ -56,7 +56,7 @@ def save_article(request):
             user.articles = [article.id]
         user.save()
 
-        return redirect('accounts:dashboard')
+        return redirect('accounts:dashboard', request.user.id)
 
 
     else:

@@ -37,17 +37,35 @@
                                   </div>
                                 </div>
                               </form>
-                            <h2>{{user.first_name}}</h2>
+                            <h2>{{user_guest.first_name}}</h2>
                         </div>
                         <div class="action-buttons">
+                            {% if not user.id == user_guest.id %}
                             <div class="row">
+                              {% if user_guest.id in user.followed %}
                                 <div class="col-xs-6">
-                                    <a href="#" class="btn btn-success btn-block"><i class="fa fa-plus-round"></i> Follow</a>
+                                  <form action ="{% url 'accounts:unfollow' %}" method='POST'>
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{user_guest.first_name}}" name = "user_id">
+                                    <input type="submit" class="btn btn-success btn-block" value="following"><i class="fa fa-plus-round"></i>
+                                  </form>
                                 </div>
+                                {% else %}
+
+                                <div class="col-xs-6">
+                                    <form action ="{% url 'accounts:follow' %}" method='POST'>
+                                        {% csrf_token %}
+                                        <input type="hidden" value="user_guest.id" name = "user_id">
+                                        <input type="submit" class="btn btn-success btn-block" value="follow"><i class="fa fa-plus-round"></i>
+                                      </form>
+                                </div>
+
+                                {% endif %}
                                 <div class="col-xs-6">
                                     <a href="#" class="btn btn-primary btn-block"><i class="fa fa-android-mail"></i> Message</a>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="section">
                             <h3>About Me</h3>
@@ -71,142 +89,82 @@
                     </div>
                 </div>
                 <div class="col-md-8">
+                    
                     <div class="profile-info-right">
+                        {% if user.id == user_guest.id %}
+                        
                             <ul class="nav nav-tabs">
-                                    <li><a href="#a" data-toggle="tab">Blogs</a></li>
-                                    <li><a href="#b" data-toggle="tab">Settings</a></li>
-                                    <li><a href="#c" data-toggle="tab">Followers</a></li>
-                                    <li><a href="#d" data-toggle="tab">Followed</a></li>
-                                    <li><a href="#e" data-toggle="tab">Create Article</a></li>
+                                    <li><a href="#blogs" data-toggle="tab">Blogs</a></li>
+                                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                                    <li><a href="#followers" data-toggle="tab">Followers</a></li>
+                                    <li><a href="#followed" data-toggle="tab">Followed</a></li>
+                                    <li><a href="#create_article" data-toggle="tab">Create Article</a></li>
                                  </ul>
                                  
                                  <div class="tab-content">
-                                    <div class="tab-pane active" id="a">
-                                        
-                                            <div class="card-deck">
-                                                    <div class="card">
-                                                      <img class="card-img-top" src="{% static 'images/marion-michele-330691.jpg' %}" alt="Card image cap">
-                                                      <div class="card-body">
-                                                        <h5 class="card-title">Card title</h5>
-                                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                      </div>
-                                                    </div>
-                                                    <div class="card">
-                                                      <img class="card-img-top" src="{% static 'images/marion-michele-330691.jpg' %}" alt="Card image cap">
-                                                      <div class="card-body">
-                                                        <h5 class="card-title">Card title</h5>
-                                                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                      </div>
-                                                    </div>
-                                                    <div class="card">
-                                                      <img class="card-img-top" src="{% static 'images/marion-michele-330691.jpg' %}" alt="Card image cap">
-                                                      <div class="card-body">
-                                                        <h5 class="card-title">Card title</h5>
-                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                      </div>
-                                                    </div>
-                                                  </div>
+
+                                      <!--blogs-->
+                                      {% include 'accounts/partials/blogs.html' %}
+
+
+                                      <!-- settings -->
+                                      {% include 'accounts/partials/settings.html' %} 
+
+                                      <!-- followers -->
+                                      {% include 'accounts/partials/followers.html' %}
+
+                                      <!-- followed-->
+                                      {% include 'accounts/partials/followed.html' %}
+                                    
+                                      <!-- create article-->
+                                      {% include 'accounts/partials/create_article.html' %}
+
+
+                          
+                                    </div>
                                     
                                     
-                                    </div>
-                                    
-                                    <div class="tab-pane" id="b">
-
-                                            <form action="{% url 'accounts:change_profile_settings' %}" method="POST">
-                                              {% csrf_token %}
-                                                    <div class="form-group">
-                                                      <label for="email">Email address</label>
-                                                      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                      <label for="firstname">First Name</label>
-                                                      <input type="text" class="form-control" id="firstname" name="first_name" placeholder="First Name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                      <label for="lastname">Last Name</label>
-                                                      <input type="text" class="form-control" id="lastname" name="last_name" placeholder="First Name">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                      <label for="birtdate">Birth Date</label>
-                                                      <input type="date" class="form-control" id="birtdate" name="birth_date" placeholder="Birth Date">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                      <label for="blogname">Blog Name</label>
-                                                      <input type="text" class="form-control" id="blogname" name="blogname" placeholder="Blog Name">
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="description">Description</label>
-                                                        <input type="text" class="form-control" id="description" name="description" placeholder="Description">
-                                                      </div>
-                                                    
-                                                      
-                                                    <div class="form-group">
-                                                        <label for="about">About</label>
-                                                        <input type="text" class="form-control" id="about" name="about" placeholder="About">
-                                                      </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                            </form>
+                            {% else %}
+                            <section class="blog-area section">
+                                <div class="container">
+                        
+                                    <div class="row">
+                                        {% for article in articles %}
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="card h-100">
+                                                <div class="single-post post-style-1">
+                        
+                                                    <div class="blog-image"><img src="{% static 'images/marion-michele-330691.jpg' %}" alt="Blog Image"></div>
+                        
+                                                    <a class="avatar" href="#"><img src="{% static 'images/icons8-team-355979.jpg' %}" alt="Profile Image"></a>
+                        
+                                                    <div class="blog-info">
+                        
+                                                        <h4 class="title"><a href="{% url 'articles:article' article.id %}"><b>{{article.title}}</b></a></h4>
+                        
+                                                        <ul class="post-footer">
+                                                            <li><a href="#"><i class="ion-heart"></i>{{article.like_count}}</a></li>
+                                                            <li><a href="#"><i class="ion-chatbubble"></i>{{article.comment_count}}</a></li>
+                                                            <li><a href="#"><i class="ion-eye"></i>{{article.seen_count}}</a></li>
+                                                        </ul>
+                        
+                                                    </div><!-- blog-info -->
+                                                </div><!-- single-post -->
+                                            </div><!-- card -->
+                                        </div><!-- col-lg-4 col-md-6 -->
+                        
+                                        {% endfor %}
+                        
+                                    </div><!-- row -->
+                        
+                                </div><!-- container -->
+                            </section><!-- section -->
 
 
-                                    </div>
-                                    <div class="tab-pane" id="c">
-
-                                      {% for follower in follower_list %}
-                                        <li>{{follower}}</li><br>
-                                      {% endfor %}
-
-
-                                    </div>
-                                    <div class="tab-pane" id="d">
-
-                                      {% for followed in followed_list %}
-                                        <li>{{followed}}</li><br>
-                                      {% endfor %}
-
-                                    </div>
-
-                                    <div class="tab-pane" id="e">
-
-                                        <form action="{% url 'articles:save_article' %}" method="POST">
-                                          {% csrf_token %}
-
-                                                <div class="form-group">
-                                                  <label for="exampleInputPassword1">Title</label>
-                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="title" placeholder="Title">
-                                                </div>
-                                                <div class="form-group">
-                                                  <label for="exampleInputPassword1">Description</label>
-                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="description" placeholder="Description">
-                                                </div>
-
-                                                <div class="form-group">
-                                                  <label for="exampleInputPassword1">Topic</label>
-                                                  <input type="text" class="form-control" id="exampleInputPassword1" name="topic" placeholder="Topic">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea3">Article</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea3" name="article" rows="7"></textarea>
-                                                  </div>
-                                                  <div class="form-group"
-                                                  <span>Add photo</span>
-                                                  <input type="file">
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-
-                                </div>
-
-                          </div>
-                    </div>
+                            {% endif %}
+                          
+                      </div>
+                    
                 </div>
             </div>
         </div>

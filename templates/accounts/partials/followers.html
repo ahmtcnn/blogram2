@@ -1,0 +1,7 @@
+<div class="tab-pane" id="followers">
+
+    {% for follower in followers %}
+    <li><a href = "{% url 'accounts:dashboard' follower.id %}">{{follower.username}}</a></li><br>
+    {% endfor %}
+
+</div>

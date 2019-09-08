@@ -1,0 +1,7 @@
+<div class="tab-pane" id="followed">
+
+    {% for followed in followed %}
+      <li><a href = "{% url 'accounts:dashboard' followed.id %}">{{followed.username}}</a></li><br>
+    {% endfor %}
+
+</div>

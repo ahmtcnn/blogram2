@@ -8,50 +8,50 @@ from articles.models import Article
 
 # Create your views here.
 
-def dashboard(request):
+def dashboard(request, user_id):
 
-    user_id                 = request.user.id
-    user                    = CustomUser.objects.get(id=user_id)
+    user_id                 = user_id
+    guest_user                    = CustomUser.objects.get(id=user_id)
 
-    followers               = user.follower
-    followed                = user.followed
-    articles                = user.articles
-    liked_articles          = user.liked_articles
-    disliked_articles       = user.disliked_articles
-    followers_list          = []
-    followed_list           = []
-    articles_list           = {}
-    liked_articles_list     = {}
-    disliked_articles_list  = {}
+    followers_list          = guest_user.follower
+    followed_list           = guest_user.followed
+    articles_list           = guest_user.articles
+    liked_articles_list     = guest_user.liked_articles
+    disliked_articles_list  = guest_user.disliked_articles
+    followers               = []
+    followed                = []
+    articles                = []
+    liked_articles          = []
+    disliked_articles       = []
 
-    for id in followers:
-        followers_list.append(CustomUser.objects.get(id=id).username)
+    for id in followers_list:
+        followers.append(CustomUser.objects.get(id=id))
 
-    for id in followed:
-        followed_list.append(CustomUser.objects.get(id=id).username)
+    for id in followed_list:
+        followed.append(CustomUser.objects.get(id=id))
 
-    for id in articles:
-        articles_list.update({Article.objects.get(id=id).id:Article.objects.get(id=id).title})
+    for id in articles_list:
+        try:
+            articles.append(Article.objects.get(id=id))
+        except:
+            articles = []
 
-    for id in articles:
-        articles_list.update({Article.objects.get(id=id).id:Article.objects.get(id=id).title})
-
-    for id in liked_articles:
-        liked_articles_list.update({Article.objects.get(id=id).id:Article.objects.get(id=id).title})
+    for id in liked_articles_list:
+        liked_articles.append(Article.objects.get(id=id))
 
     for id in disliked_articles:
-        disliked_articles_list.update({Article.objects.get(id=id).id:Article.objects.get(id=id).title})
+        disliked_articles.append(Article.objects.get(id=id))
     
 
 
     context = {
 
-        'user':user,
-        'follower_list':followers_list,
-        'followed_list':followed_list,
-        'articles_list':articles_list,
-        'liked_articles':liked_articles_list,
-        'disliked_articles':disliked_articles_list,
+        'user_guest':guest_user,
+        'followers':followers,
+        'followed':followed,
+        'articles':articles,
+        'liked_articles':liked_articles,
+        'disliked_articles':disliked_articles,
     }
 
     return render(request, 'accounts/dashboard.html',context)
@@ -69,7 +69,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             #messages.success(request, ' You are now logged in')
-            return redirect('accounts:dashboard')
+            return redirect('pages:index')
         else:
             #messages.error(request, 'Invalid credentials')
             return redirect('accounts:login')
@@ -125,6 +125,7 @@ def logout(request):
     return redirect('pages:index')
 
 def change_profile_settings(request):
+
     if request.method == 'POST':
         
         # Get all post variables
@@ -154,3 +155,27 @@ def change_profile_settings(request):
 
     else:
         return redirect('accounts:dashboard')
+
+def follow(request):
+    if request.method == 'POST':
+        user = request.user
+
+        follow_id = request.POST['user_id']
+
+        user.followed.append(follow_id)
+        #print(follow_id)
+
+    return render(request, 'accounts/dashboard.html')
+
+
+
+
+def unfollow(request):
+    if request.method == 'POST':
+        user = request.user
+
+        follow_id = request.POST['user_id']
+
+        user.followed.remove(follow_id)    
+
+    return render(request, 'accounts/dashboard.html')
