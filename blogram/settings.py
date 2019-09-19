@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #local apps
+    # local apps
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
     'articles.apps.ArticlesConfig',
@@ -138,4 +138,4 @@ STATICFILES_DIRS = [
 # Media Folder Settings
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL =  '/media/'
+MEDIA_URL = '/media/'

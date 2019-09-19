@@ -1,44 +1,44 @@
 <div class="tab-pane" id="settings">
 
-    <form action="{% url 'accounts:change_profile_settings' %}" method="POST">
-      {% csrf_token %}
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+  <form action="{% url 'accounts:change_profile_settings' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
 
-            </div>
-            <div class="form-group">
-              <label for="firstname">First Name</label>
-              <input type="text" class="form-control" id="firstname" name="first_name" placeholder="First Name">
-            </div>
-            <div class="form-group">
-              <label for="lastname">Last Name</label>
-              <input type="text" class="form-control" id="lastname" name="last_name" placeholder="First Name">
-            </div>
+    </div>
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" name="first_name" value="{{user.first_name}}">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" name="last_name" value="{{user.last_name}}">
+    </div>
 
-            <div class="form-group">
-              <label for="birtdate">Birth Date</label>
-              <input type="date" class="form-control" id="birtdate" name="birth_date" placeholder="Birth Date">
-            </div>
+    <div class="form-group">
+      <label for="birtdate">Birth Date</label>
+      <input type="date" class="form-control" id="birtdate" name="birth_date" value="{{user.birth_date|date}}">
+    </div>
 
-            <div class="form-group">
-              <label for="blogname">Blog Name</label>
-              <input type="text" class="form-control" id="blogname" name="blogname" placeholder="Blog Name">
-            </div>
+    <div class="form-group">
+      <label for="blogname">Blog Name</label>
+      <input type="text" class="form-control" id="blogname" name="blogname" value="{{user.blogname}}">
+    </div>
 
 
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name="description" placeholder="Description">
-              </div>
-            
-              
-            <div class="form-group">
-                <label for="about">About</label>
-                <input type="text" class="form-control" id="about" name="about" placeholder="About">
-              </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" name="description" value="{{user.description}}">
+    </div>
+
+
+    <div class="form-group">
+      <label for="about">About</label>
+      <input type="text" class="form-control" id="about" name="about" value="{{user.about}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
 
 </div>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser,Follows
+from .models import CustomUser, Follows
 
 # Register your models here.
 

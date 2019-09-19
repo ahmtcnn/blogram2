@@ -17,6 +17,8 @@ def dashboard(request, user_id):
     # Get followers and followed users from model's static method
     followers = Follows.get_followers(guest_user)
     followed = Follows.get_followed(guest_user)
+    if guest_user.email in followers:
+        print("okey")
 
     context = {
 
@@ -110,6 +112,7 @@ def change_profile_settings(request):
         birth_date = request.POST['birth_date']
         blogname = request.POST['blogname']
         description = request.POST['description']
+        about = request.POST['about']
 
         # Access our user - This maybe different
         user_id = request.user.id
@@ -119,12 +122,13 @@ def change_profile_settings(request):
         user.email = email
         user.first_name = first_name
         user.last_name = last_name
-        user.birth_date = birth_date
+        #user.birth_date = birth_date
         user.blogname = blogname
         user.description = description
+        user.about = about
         user.save()
 
-        return redirect('accounts:dashboard')
+        return redirect('accounts:dashboard', user_id)
 
     else:
         return redirect('accounts:dashboard')
@@ -136,11 +140,11 @@ def follow(request):
 
         follow_id = request.POST['user_id']
         followed_user = CustomUser.objects.get(pk=follow_id)
-        follow = Follows(follower=user, followed=followed_user)
-        follow.save()
-        # print(follow_id)
+        if not Follows.objects.filter(follower=user, followed=followed_user).exists() and follow_id != followed_user:
+            follow = Follows(follower=user, followed=followed_user)
+            follow.save()
+    return redirect('accounts:dashboard',followed_user.id)
 
-    return render(request, 'accounts/dashboard.html')
 
 
 def unfollow(request):
@@ -149,6 +153,6 @@ def unfollow(request):
 
         unfollow_id = request.POST['user_id']
         unfollowed_user = CustomUser.objects.get(pk=unfollow_id)
-        user.follows_set.get(follower=user, followed=unfollowed_user).delete()
+        Follows.objects.get(follower=user,followed=unfollowed_user).delete()
 
-    return render(request, 'accounts/dashboard.html')
+    return redirect('accounts:dashboard',unfollowed_user.id)
