@@ -7,174 +7,192 @@
 <br>
 
 <meta charset="utf-8">
-    <!--  This file has been downloaded from https://bootdey.com  -->
-    <!--  All snippets are MIT license https://bootdey.com/license -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/mystyle.css' %}">
+<!--  This file has been downloaded from https://bootdey.com  -->
+<!--  All snippets are MIT license https://bootdey.com/license -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/mystyle.css' %}">
 
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container">
-        <div class="user-profile">
-            <div class="profile-header-background"><img src="http://demo.thedevelovers.com/dashboard/queenadmin-1.2/assets/img/city.jpg" alt="Profile Header Background"></div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-info-left">
-                        <div class="text-center">
-                            <form class="md-form">
-                                <div class="file-field">
-                                  <div class="mb-4">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div class="user-profile">
+        <div class="profile-header-background"><img
+                src="http://demo.thedevelovers.com/dashboard/queenadmin-1.2/assets/img/city.jpg"
+                alt="Profile Header Background"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-info-left">
+                    <div class="text-center">
+                        <form class="md-form">
+                            <div class="file-field">
+                                <div class="mb-4">
 
-                                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar" class="avatar img-circle">
-                                  </div>
-                                  <div class="d-flex justify-content-center">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"
+                                        class="avatar img-circle">
+                                </div>
+                                <div class="d-flex justify-content-center">
                                     <div class="btn btn-mdb-color btn-rounded float-left">
-                                      <span>Change photo</span>
-                                      <input type="file">
+                                        <span>Change photo</span>
+                                        <input type="file">
                                     </div>
-                                  </div>
-                                </div>
-                              </form>
-                            <h2>{{user_guest.first_name}}</h2>
-                        </div>
-                        <div class="action-buttons">
-                            {% if not user.id == user_guest.id %}
-                            <div class="row">
-                              {% if user_guest.id in user.followed %}
-                                <div class="col-xs-6">
-                                  <form action ="{% url 'accounts:unfollow' %}" method='POST'>
-                                    {% csrf_token %}
-                                    <input type="hidden" value="{{user_guest.first_name}}" name = "user_id">
-                                    <input type="submit" class="btn btn-success btn-block" value="following"><i class="fa fa-plus-round"></i>
-                                  </form>
-                                </div>
-                                {% else %}
-
-                                <div class="col-xs-6">
-                                    <form action ="{% url 'accounts:follow' %}" method='POST'>
-                                        {% csrf_token %}
-                                        <input type="hidden" value="user_guest.id" name = "user_id">
-                                        <input type="submit" class="btn btn-success btn-block" value="follow"><i class="fa fa-plus-round"></i>
-                                      </form>
-                                </div>
-
-                                {% endif %}
-                                <div class="col-xs-6">
-                                    <a href="#" class="btn btn-primary btn-block"><i class="fa fa-android-mail"></i> Message</a>
                                 </div>
                             </div>
+                        </form>
+                        <h2>{{user_guest.first_name}}</h2>
+                    </div>
+                    <div class="action-buttons">
+                        {% if not user.id == user_guest.id %}
+                        <div class="row">
+                            {% if user_guest.id in user.follows_set.all %}
+                            <div class="col-xs-6">
+                                <form action="{% url 'accounts:unfollow' %}" method='POST'>
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{user_guest.first_name}}" name="user_id">
+                                    <input type="submit" class="btn btn-success btn-block" value="following"><i
+                                        class="fa fa-plus-round"></i>
+                                </form>
+                            </div>
+                            {% else %}
+
+                            <div class="col-xs-6">
+                                <form action="{% url 'accounts:follow' %}" method='POST'>
+                                    {% csrf_token %}
+                                    <input type="hidden" value="user_guest.id" name="user_id">
+                                    <input type="submit" class="btn btn-success btn-block" value="follow"><i
+                                        class="fa fa-plus-round"></i>
+                                </form>
+                            </div>
+
                             {% endif %}
+                            <div class="col-xs-6">
+                                <a href="#" class="btn btn-primary btn-block"><i class="fa fa-android-mail"></i>
+                                    Message</a>
+                            </div>
                         </div>
-                        <div class="section">
-                            <h3>About Me</h3>
-                            <p>Energistically administrate 24/7 portals and enabled catalysts for change. Objectively revolutionize client-centered e-commerce via covalent scenarios. Continually envisioneer.</p>
-                        </div>
-                        <div class="section">
-                            <h3>Statistics</h3>
-                            <p><span class="badge">332</span> Following</p>
-                            <p><span class="badge">124</span> Followers</p>
-                            <p><span class="badge">620</span> Likes</p>
-                        </div>
-                        <div class="section">
-                            <h3>Social</h3>
-                            <ul class="list-unstyled list-social">
-                                <li><a href="#"><i class="fa fa-twitter"></i> @ahmtcn</a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i> ahmtcn</a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i> ahmtcn</a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i> ahmtcn</a></li>
-                            </ul>
-                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="section">
+                        <h3>About Me</h3>
+                        <p>Energistically administrate 24/7 portals and enabled catalysts for change. Objectively
+                            revolutionize client-centered e-commerce via covalent scenarios. Continually envisioneer.
+                        </p>
+                    </div>
+                    <div class="section">
+                        <h3>Statistics</h3>
+                        <p><span class="badge">{{ followed|length }}</span> Following</p>
+                        <p><span class="badge">{{ followers|length }}</span> Followers</p>
+                        <p><span class="badge">620</span> Likes</p>
+                    </div>
+                    <div class="section">
+                        <h3>Social</h3>
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#"><i class="fa fa-twitter"></i> @ahmtcn</a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i> ahmtcn</a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i> ahmtcn</a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i> ahmtcn</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    
-                    <div class="profile-info-right">
-                        {% if user.id == user_guest.id %}
-                        
-                            <ul class="nav nav-tabs">
-                                    <li><a href="#blogs" data-toggle="tab">Blogs</a></li>
-                                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                                    <li><a href="#followers" data-toggle="tab">Followers</a></li>
-                                    <li><a href="#followed" data-toggle="tab">Followed</a></li>
-                                    <li><a href="#create_article" data-toggle="tab">Create Article</a></li>
-                                 </ul>
-                                 
-                                 <div class="tab-content">
+            </div>
+            <div class="col-md-8">
 
-                                      <!--blogs-->
-                                      {% include 'accounts/partials/blogs.html' %}
+                <div class="profile-info-right">
+                    {% if user.id == user_guest.id %}
 
+                    <ul class="nav nav-tabs">
+                        <li><a href="#blogs" data-toggle="tab">Blogs</a></li>
+                        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                        <li><a href="#followers" data-toggle="tab">Followers</a></li>
+                        <li><a href="#followed" data-toggle="tab">Followed</a></li>
+                        <li><a href="#create_article" data-toggle="tab">Create Article</a></li>
+                    </ul>
 
-                                      <!-- settings -->
-                                      {% include 'accounts/partials/settings.html' %} 
+                    <div class="tab-content">
 
-                                      <!-- followers -->
-                                      {% include 'accounts/partials/followers.html' %}
-
-                                      <!-- followed-->
-                                      {% include 'accounts/partials/followed.html' %}
-                                    
-                                      <!-- create article-->
-                                      {% include 'accounts/partials/create_article.html' %}
+                        <!--blogs-->
+                        {% include 'accounts/partials/blogs.html' %}
 
 
-                          
-                                    </div>
-                                    
-                                    
-                            {% else %}
-                            <section class="blog-area section">
-                                <div class="container">
-                        
-                                    <div class="row">
-                                        {% for article in articles %}
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="card h-100">
-                                                <div class="single-post post-style-1">
-                        
-                                                    <div class="blog-image"><img src="{% static 'images/marion-michele-330691.jpg' %}" alt="Blog Image"></div>
-                        
-                                                    <a class="avatar" href="#"><img src="{% static 'images/icons8-team-355979.jpg' %}" alt="Profile Image"></a>
-                        
-                                                    <div class="blog-info">
-                        
-                                                        <h4 class="title"><a href="{% url 'articles:article' article.id %}"><b>{{article.title}}</b></a></h4>
-                        
-                                                        <ul class="post-footer">
-                                                            <li><a href="#"><i class="ion-heart"></i>{{article.like_count}}</a></li>
-                                                            <li><a href="#"><i class="ion-chatbubble"></i>{{article.comment_count}}</a></li>
-                                                            <li><a href="#"><i class="ion-eye"></i>{{article.seen_count}}</a></li>
-                                                        </ul>
-                        
-                                                    </div><!-- blog-info -->
-                                                </div><!-- single-post -->
-                                            </div><!-- card -->
-                                        </div><!-- col-lg-4 col-md-6 -->
-                        
-                                        {% endfor %}
-                        
-                                    </div><!-- row -->
-                        
-                                </div><!-- container -->
-                            </section><!-- section -->
+                        <!-- settings -->
+                        {% include 'accounts/partials/settings.html' %}
+
+                        <!-- followers -->
+                        {% include 'accounts/partials/followers.html' %}
+
+                        <!-- followed-->
+                        {% include 'accounts/partials/followed.html' %}
+
+                        <!-- create article-->
+                        {% include 'accounts/partials/create_article.html' %}
 
 
-                            {% endif %}
-                          
-                      </div>
-                    
+
+                    </div>
+
+
+                    {% else %}
+                    <section class="blog-area section">
+                        <div class="container">
+
+                            <div class="row">
+                                {% for article in articles %}
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="card h-100">
+                                        <div class="single-post post-style-1">
+
+                                            <div class="blog-image"><img
+                                                    src="{% static 'images/marion-michele-330691.jpg' %}"
+                                                    alt="Blog Image"></div>
+
+                                            <a class="avatar" href="#"><img
+                                                    src="{% static 'images/icons8-team-355979.jpg' %}"
+                                                    alt="Profile Image"></a>
+
+                                            <div class="blog-info">
+
+                                                <h4 class="title"><a
+                                                        href="{% url 'articles:article' article.id %}"><b>{{article.title}}</b></a>
+                                                </h4>
+
+                                                <ul class="post-footer">
+                                                    <li><a href="#"><i class="ion-heart"></i>{{article.like_count}}</a>
+                                                    </li>
+                                                    <li><a href="#"><i
+                                                                class="ion-chatbubble"></i>{{article.comment_count}}</a>
+                                                    </li>
+                                                    <li><a href="#"><i class="ion-eye"></i>{{article.seen_count}}</a>
+                                                    </li>
+                                                </ul>
+
+                                            </div><!-- blog-info -->
+                                        </div><!-- single-post -->
+                                    </div><!-- card -->
+                                </div><!-- col-lg-4 col-md-6 -->
+
+                                {% endfor %}
+
+                            </div><!-- row -->
+
+                        </div><!-- container -->
+                    </section><!-- section -->
+
+
+                    {% endif %}
+
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 
-    
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        
-    </script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+</script>
 
 
 

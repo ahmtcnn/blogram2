@@ -21,10 +21,10 @@
     
                                 <div class="blog-info">
     
-                                    <h4 class="title"><a href="#"><b>{{article.title}}</b></a></h4>
+                                    <h4 class="title"><a href="{% url 'articles:article' article.id %}"><b>{{article.title}}</b></a></h4>
     
                                     <ul class="post-footer">
-                                        <li><a href="#"><i class="ion-heart"></i>{{article.like_count}}</a></li>
+                                        <li><a href=""><i class="ion-heart"></i>{{article.like_count}}</a></li>
                                         <li><a href="#"><i class="ion-chatbubble"></i>{{article.comment_count}}</a></li>
                                         <li><a href="#"><i class="ion-eye"></i>{{article.seen_count}}</a></li>
                                     </ul>

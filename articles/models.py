@@ -17,8 +17,6 @@ class Article(models.Model):
     publish_date    = models.DateField(default=datetime.now)
     like_count      = models.IntegerField(default=0)
     dislike_count   = models.IntegerField(default=0)
-    who_liked       = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
-    who_disliked    = ArrayField(models.IntegerField(null=True, blank=True),null=True,blank=True)
     is_edited       = models.BooleanField(default=False)
     last_edited     = models.DateField(default=datetime.now)
     seen_count      = models.IntegerField(default=0)
