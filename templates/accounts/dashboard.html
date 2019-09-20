@@ -6,10 +6,7 @@
 <br>
 <br>
 
-<meta charset="utf-8">
-<!--  This file has been downloaded from https://bootdey.com  -->
-<!--  All snippets are MIT license https://bootdey.com/license -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/mystyle.css' %}">
@@ -28,7 +25,7 @@
 
                         <div class="mb-4">
 
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Avatar"
+                            <img src="{{ user_guest.photo.url }}" alt="Avatar"
                                 class="avatar img-circle">
                         </div>
 
@@ -129,50 +126,9 @@
 
 
                     {% else %}
-                    <section class="blog-area section">
-                        <div class="container">
+                                            <!--blogs-->
+                    {% include 'accounts/partials/blogs.html' %}
 
-                            <div class="row">
-                                {% for article in articles %}
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="card h-100">
-                                        <div class="single-post post-style-1">
-
-                                            <div class="blog-image"><img
-                                                    src="{% static 'images/marion-michele-330691.jpg' %}"
-                                                    alt="Blog Image"></div>
-
-                                            <a class="avatar" href="#"><img
-                                                    src="{% static 'images/icons8-team-355979.jpg' %}"
-                                                    alt="Profile Image"></a>
-
-                                            <div class="blog-info">
-
-                                                <h4 class="title"><a
-                                                        href="{% url 'articles:article' article.id %}"><b>{{article.title}}</b></a>
-                                                </h4>
-
-                                                <ul class="post-footer">
-                                                    <li><a href="#"><i class="ion-heart"></i>{{article.like_count}}</a>
-                                                    </li>
-                                                    <li><a href="#"><i
-                                                                class="ion-chatbubble"></i>{{article.comment_count}}</a>
-                                                    </li>
-                                                    <li><a href="#"><i class="ion-eye"></i>{{article.seen_count}}</a>
-                                                    </li>
-                                                </ul>
-
-                                            </div><!-- blog-info -->
-                                        </div><!-- single-post -->
-                                    </div><!-- card -->
-                                </div><!-- col-lg-4 col-md-6 -->
-
-                                {% endfor %}
-
-                            </div><!-- row -->
-
-                        </div><!-- container -->
-                    </section><!-- section -->
 
 
                     {% endif %}
@@ -186,9 +142,7 @@
 
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript">
 
-</script>
 
 
 

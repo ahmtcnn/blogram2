@@ -1,6 +1,6 @@
 <div class="tab-pane" id="create_article">
 
-    <form action="{% url 'articles:save_article' %}" method="POST">
+    <form action="{% url 'articles:save_article' %}" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
 
             <div class="form-group">
@@ -21,10 +21,12 @@
                 <label for="exampleFormControlTextarea3">Article</label>
                 <textarea class="form-control" id="exampleFormControlTextarea3" name="article" rows="7"></textarea>
               </div>
+
               <div class="form-group">
-              <span>Add photo</span>
-              <input type="file">
-            </div>
+                  <label for="exampleInputPassword1">Main Photo</label>
+                  <input type="file" class="form-control" id="exampleInputPassword1" name="main_photo" >
+                </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

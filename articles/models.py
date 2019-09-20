@@ -7,11 +7,11 @@ from accounts.models import CustomUser
 
 
 def upload_to(instance, filename):
-    return 'images/%s/%s' % (instance.user.user.username, filename)
+    return 'articles/%s/%s' % (instance.title, filename)
 
 
 class Article(models.Model):
-    writer =  models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    writer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     article = models.TextField(blank=True)
     title = models.CharField(max_length=100)
     topic = models.CharField(max_length=200)
@@ -35,3 +35,18 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+class Likes(models.Model):
+    liker_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="liker_user")
+    liked_article = models.ForeignKey(Article,on_delete=models.CASCADE,related_name="liked_article")
+
+    def __str__(self):
+        return "%s -> %s" % (self.liker_user,self.liked_article)
+
+    @staticmethod
+    def get_liked_articles(CustomUser):
+        liked_articles = Likes.objects.filter(liker_user=CustomUser)
+        liked_articles_list  = []
+        for likes in liked_articles:
+            liked_articles_list.append(likes.liked_article)
+        return liked_articles_list

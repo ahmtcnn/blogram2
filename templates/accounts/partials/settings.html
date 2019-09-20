@@ -1,6 +1,6 @@
 <div class="tab-pane" id="settings">
 
-  <form action="{% url 'accounts:change_profile_settings' %}" method="POST">
+  <form action="{% url 'accounts:change_profile_settings' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
       <label for="email">Email address</label>
@@ -37,6 +37,12 @@
       <label for="about">About</label>
       <input type="text" class="form-control" id="about" name="about" value="{{user.about}}">
     </div>
+
+    <div class="form-group">
+      <label for="description">Profile Image</label>
+      <input type="file" class="form-control" id="image" name="image">
+    </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 

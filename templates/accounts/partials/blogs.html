@@ -13,9 +13,9 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{% static 'images/marion-michele-330691.jpg' %}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{article.main_photo.url}}" style="width:275px;height: 183px;" alt="Blog Image"></div>
 
-                            <a class="avatar" href="#"><img src="{% static 'images/icons8-team-355979.jpg' %}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img src="{{article.writer.photo.url}}" alt="Profile Image"></a>
 
                             <div class="blog-info">
 

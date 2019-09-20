@@ -10,13 +10,14 @@
 
             <ul class="main-menu visible-on-click" id="main-menu">
                 <li><a href="{% url 'pages:index' %}">Home</a></li>
-                <li><a href="{% url 'articles:index' %}">Articles</a></li>
+
 
                 {% if not user.is_authenticated %}
                 <li><a href="{% url 'pages:about' %}">About</a></li>
                 <li><a href="{% url 'accounts:login' %}">Login</a></li>
                 <li><a href="{% url 'accounts:register' %}">Register</a></li>
                 {% else  %}
+                <li><a href="{% url 'articles:index' %}">Articles</a></li>
                 <li><a href="{% url 'accounts:dashboard' user.id %}">({{user.username}})Dashboard</a></li>
                 <li><a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
                         <i class="fas fa-sign-out-alt">Logout</i>
@@ -31,9 +32,10 @@
             </ul><!-- main-menu -->
 
             <div class="src-area">
-                <form>
+                <form action="{% url 'articles:search' %}" method="POST">
+                    {% csrf_token %}
                     <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                    <input class="src-input" type="text" placeholder="Type of search">
+                    <input class="src-input" type="text" placeholder="Type of search" name="search">
                 </form>
             </div>
 

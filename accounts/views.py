@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import CustomUser, Follows
 from articles.models import Article
+from upload_validator import FileTypeValidator
 
 
 def dashboard(request, user_id):
@@ -96,14 +97,17 @@ def logout(request):
     if request.method == "POST":
         auth.logout(request)
         # messages.success(request, 'You are now logged out')
-        return redirect('pages:index')
+        return redirect('accounts:login')
 
-    return redirect('pages:index')
+    return redirect('accounts:login')
 
 
 def change_profile_settings(request):
-
+    # form yapılacak
     if request.method == 'POST':
+        # Access our user - This maybe different
+        user_id = request.user.id
+        user = CustomUser.objects.get(id=user_id)
 
         # Get all post variables
         email = request.POST['email']
@@ -113,10 +117,20 @@ def change_profile_settings(request):
         blogname = request.POST['blogname']
         description = request.POST['description']
         about = request.POST['about']
+        if 'image' in request.FILES:
+            image = request.FILES['image']
 
-        # Access our user - This maybe different
-        user_id = request.user.id
-        user = CustomUser.objects.get(id=user_id)
+            validator = FileTypeValidator(
+                allowed_types=['image/jpeg',"image/png","image/jpg"],
+                allowed_extensions=['.jpg', '.png']
+            )
+
+            try:
+                validator(image)
+            except:
+                user_id = request.user.id
+                return redirect('accounts:dashboard',user_id)
+            user.photo = image
 
         # Update user attiributes
         user.email = email
@@ -126,6 +140,7 @@ def change_profile_settings(request):
         user.blogname = blogname
         user.description = description
         user.about = about
+
         user.save()
 
         return redirect('accounts:dashboard', user_id)

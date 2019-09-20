@@ -6,7 +6,7 @@ from django.db import models
 
 
 def upload_to(instance, filename):
-    return 'profile_photos/%s/%s' % (instance.user.username, filename)
+    return 'profile_photos/%s/%s' % (instance.username, filename)
 
 
 class CustomUser(AbstractUser):
