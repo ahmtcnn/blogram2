@@ -18,8 +18,7 @@ def dashboard(request, user_id):
     # Get followers and followed users from model's static method
     followers = Follows.get_followers(guest_user)
     followed = Follows.get_followed(guest_user)
-    if guest_user.email in followers:
-        print("okey")
+
 
     context = {
 

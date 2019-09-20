@@ -24,9 +24,13 @@
                     <div class="text-center">
 
                         <div class="mb-4">
-
+                            {% if user_guestçphoto.url %}
                             <img src="{{ user_guest.photo.url }}" alt="Avatar"
                                 class="avatar img-circle">
+                            {% else %}
+                            <img src="https://www.eguardtech.com/wp-content/uploads/2018/08/Network-Profile.png" alt="Avatar"
+                            class="avatar img-circle">
+                            {% endif %}
                         </div>
 
 
