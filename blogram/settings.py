@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third party softwares
     'crispy_forms',
+    'django.contrib.humanize',
 
     # local apps
     'accounts.apps.AccountsConfig',

@@ -5,7 +5,7 @@ from accounts.models import CustomUser
 
 # Create your models here.
 
-choices_test = CHOICES= (
+area_choices = [
 ('sport', 'Sport'),
 ('social', 'Social'),
 ('science', 'Science'),
@@ -13,7 +13,7 @@ choices_test = CHOICES= (
 ('health', 'Health'),
 ('political', 'Political'),
 ('magazin', 'Magazin'),
-)
+]
 
 def upload_to(instance, filename):
     return 'articles/%s/%s' % (instance.title, filename)
@@ -28,7 +28,7 @@ class Article(models.Model):
     publish_date = models.DateField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
     dislike_count = models.IntegerField(default=0)
-    related_area = models.CharField(max_length=25, choices=choices_test,null=True)
+    related_area = models.CharField(max_length=25, choices=area_choices,null=True)
     is_edited = models.BooleanField(default=False)
     last_edited = models.DateField(auto_now_add=True)
     seen_count = models.IntegerField(default=0)
@@ -60,3 +60,13 @@ class Likes(models.Model):
         for likes in liked_articles:
             liked_articles_list.append(likes.liked_article)
         return liked_articles_list
+
+
+class Comments(models.Model):
+    article = models.ForeignKey("articles.Article", on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.CustomUser", on_delete=models.CASCADE)
+    comment = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.article.title

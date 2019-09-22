@@ -1,9 +1,62 @@
 {% load crispy_forms_tags %}
 <div class="tab-pane" id="settings">
 
-  <form action="{% url 'accounts:change_profile_settings' %}" method="POST" enctype="multipart/form-data">
+  <form class="form-horizontal" action="{% url 'accounts:change_profile_settings' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{account_form|crispy}}
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" name="email" maxlength="254" id="id_email" value="{{user.email}}">
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label class="control-label col-sm-2" for="first_name">First Name:</label>
+          <div class="col-sm-10">
+              <input type="text" name="first_name" maxlength="30" id="id_first_name" value="{{user.first_name}}" >
+          </div>
+        </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="last_name">Last Name:</label>
+        <div class="col-sm-10">
+            <input type="text" name="last_name" maxlength="150" id="id_last_name" value="{{user.last_name}}">
+        </div>
+      </div>
+
+
+  <div class="form-group">
+          <label class="control-label col-sm-2" for="birth_date">Birth Date:</label>
+          <div class="col-sm-10">
+              <input type="date" name="birth_date" id="id_birth_date" value="{{user.birth_date}}">
+          </div>
+        </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="blogname">Blog Name:</label>
+        <div class="col-sm-10">
+                <input type="text" name="blogname" maxlength="30" id="id_blogname" value="{{user.blogname}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">About</label>
+        <div class="col-sm-10">
+            <textarea rows="3" cols="22" name="about" id="id_about">{{user.about}}</textarea>
+        </div>
+      </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Profile Photo:</label>
+        <div class="col-sm-10">
+            <input type="file" name="image" accept="image/*" id="id_photo">
+        </div>
+      </div>
+
+
+
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 

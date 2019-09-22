@@ -42,7 +42,7 @@
                                         </a>
                                     </li>
                                     {% endif %}
-                                    <li><a href="#"><i class="ion-chatbubble"></i>{{article.comment_count}}</a></li>
+                                    <li><a href="#"><i class="ion-chatbubble"></i>{{article.comments_set.all.count}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{article.seen_count}}</a></li>
                                 </ul>
 

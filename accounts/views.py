@@ -22,7 +22,7 @@ def dashboard(request, user_id):
     # Get followers and followed users from model's static method
     followers = Follows.get_followers(guest_user)
     followed = Follows.get_followed(guest_user)
-
+    print(account_form)
 
     context = {
 
@@ -121,7 +121,6 @@ def change_profile_settings(request):
         last_name = request.POST['last_name']
         birth_date = request.POST['birth_date']
         blogname = request.POST['blogname']
-        description = request.POST['description']
         about = request.POST['about']
         if 'image' in request.FILES:
             image = request.FILES['image']
@@ -144,7 +143,6 @@ def change_profile_settings(request):
         user.last_name = last_name
         #user.birth_date = birth_date
         user.blogname = blogname
-        user.description = description
         user.about = about
 
         user.save()

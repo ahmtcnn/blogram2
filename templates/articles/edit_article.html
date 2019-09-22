@@ -1,0 +1,64 @@
+
+
+<form class="form-horizontal" action="{% url 'articles:edit_article' article.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    <div class="input-group input-group-sm mb-3">
+        <label class="control-label col-sm-2" for="title">Title:</label>
+        <div class="col-sm-10">
+            <input type="text" name="title" id="id_title" value="{{article.title}}">
+        </div>
+      </div>
+
+      <div class="input-group input-group-sm mb-3">
+          <label class="control-label col-sm-2">Related Area:</label>
+          <div class="col-sm-10">
+                <select name="related_area">
+                        <option selected="true" disabled="disabled" >Areas</option>
+                        {% for key,value in related_area %}
+                            <option value="{{key}}" {% if key == values.related_area %}
+                            selected
+                          {% endif %}>{{ value }}</option>
+                          {% endfor %}
+                </select>
+          </div>
+        </div>
+
+
+
+
+    <div class="input-group input-group-sm mb-3">
+        <label class="control-label col-sm-2" for="last_name">Description:</label>
+        <div class="col-sm-10">
+            <input type="text" name="description" id="id_description" value="{{article.description}}">
+        </div>
+      </div>
+
+
+  <div class="input-group input-group-sm mb-3">
+          <label class="control-label col-sm-2">Topic:</label>
+          <div class="col-sm-10">
+              <input type="text" name="topic" id="id_topic" value="{{article.topic}}">
+          </div>
+        </div>
+
+    <div class="form-group input-group-sm mb-3">
+        <label class="control-label col-sm-2" for="blogname">Article:</label>
+        <div class="col-sm-10">
+                <textarea class="form-control" aria-label="Article" rows="3" name="article" cols="70" id="id_blogname">{{article.article}}</textarea>
+        </div>
+    </div>
+
+    <div class="input-group input-group-sm mb-3">
+            <label class="control-label col-sm-2">Main Photo:</label>
+            <div class="col-sm-10">
+                <img src = "{{article.main_photo.url}}" style="width: 50px;height: 50px">
+                <input type="file" name="main_photo" id="id_main_photo" value="{{article.main_photo.url}}">
+            </div>
+          </div>
+
+
+    <input type="submit" class="btn btn-primary" value="Save">
+  </form>
+

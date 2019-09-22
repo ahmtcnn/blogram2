@@ -4,8 +4,8 @@
 __pycache__/
 local_settings.py
 db.sqlite3
-/media/profile_photos/
-/media/articles/
+/media/profile_photos/*
+/media/articles/*
 venv
 /static
 .vscode

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load humanize %}
 {% block content %}
 
 
@@ -9,25 +9,91 @@
 </div><!-- slider -->
 
 <section class="blog-area section">
-    <div class="container">
-
         <div class="row">
             <div class="col-lg-2 col-md-0"></div>
-            <div class="col-lg-8 col-md-12">
-                <div class="post-wrapper">
-
+            <div class="col-lg-8 col-md-12" id="area">
+                <div class="post-wrapper" >
+                    {% if article.writer == user %}
+                    <button id="edit" class="btn">Edit This Article</button>
+                    {% endif %}
                     <h3 class="title"><a href="#"><b>{{article.title}}</b></a></h3>
 
                     {{article.article}}
 
-
                 </div><!-- post-wrapper -->
-            </div><!-- col-sm-8 col-sm-offset-2 -->
+            </div><!-- col-sm-8 col-sm-offset-2 -->  
         </div><!-- row -->
+        
+<div class="container" id="comment">
 
-    </div><!-- container -->
+    <div class="row bootstrap snippets">
+        <div class="col-md-6 col-md-offset-2 col-sm-12">
+            <div class="comment-wrapper">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Comment panel
+                    </div>
+                    <div class="panel-body">
+                        <form action="{% url 'articles:create_comment' %}" method="POST">
+                            {% csrf_token %}
+                        <input type="hidden" name="article_id" value={{article.id}}>
+                        <textarea class="form-control" placeholder="write a comment..." rows="3" name="comment"></textarea>
+                        <br>
+                        <input type="submit" class="btn btn-info pull-right" value="Post">
+                        
+                        </form>
+                        <hr>
+                        <ul class="media-list">
+                            {% for comment in comments %}
+                            <li class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="{{comment.user.photo.url}}" alt="" class="img-circle" style="width: 60px;height: 60px;">
+                                </a>
+                                <div class="media-body">
+                                    <span class="text-muted pull-right">
+                                        <small class="text-muted">{{comment.date | timesince}}</small>
+                                    </span>
+                                    <strong class="text-success">@{{comment.user.username}}</strong>
+                                    <p>
+                                        {{comment.comment}}
+                                    </p>
+                                </div>
+                            </li>
+                            <br>
+                            <hr>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+    
+</div>
+
 </section><!-- section -->
 
+<script>
+     $(document).ready(function(){
+            $("#edit").on("click",function(){
+                $.ajax({
+                    url:"{% url 'articles:edit_article' article.id %}",
+                    method:"GET",
+                    success:function(response){
+                        $("#comment").html(" ");
+                        $("#area").html(response);
+                    }
+                }); 
+
+            });
+        });
+
+
+
+
+</script>
 
 
 {% endblock %}
