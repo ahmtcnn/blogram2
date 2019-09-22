@@ -4,12 +4,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import CustomUser, Follows
 from articles.models import Article
+from articles.forms import ArticleForm
 from upload_validator import FileTypeValidator
+from django.contrib import messages
+from .forms import AccountForm,LoginForm
 
 
 def dashboard(request, user_id):
     # Get visited page's user id to show his/her properties
-
+    article_form = ArticleForm()
+    account_form = AccountForm()
     guest_user = CustomUser.objects.get(id=user_id)
 
     # Get articles
@@ -26,6 +30,8 @@ def dashboard(request, user_id):
         'articles': articles,
         'followers': followers,
         'followed': followed,
+        'article_form':article_form,
+        'account_form':account_form,
     }
 
     return render(request, 'accounts/dashboard.html', context)
@@ -42,13 +48,16 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            # messages.success(request, ' You are now logged in')
+            messages.success(request, ' You are now logged in')
             return redirect('pages:index')
         else:
-            # messages.error(request, 'Invalid credentials')
+            messages.error(request, 'Invalid credentials')
             return redirect('accounts:login')
     else:
-        return render(request, 'accounts/login.html')
+        if request.user.is_authenticated:
+            return redirect('accounts:dashboard',request.user.id)
+        else:
+            return render(request,'accounts/login.html')
 
 
 def register(request):
@@ -62,28 +71,26 @@ def register(request):
 
         # Check if password match
         if password == password2:
-            # Check username
+            # Check username if exist
             User = get_user_model()
             if User.objects.filter(username=username).exists():
-                # messages.error(request,'This username is taken')
+                messages.error(request,'This username is taken')
                 return redirect('accounts:register')
-            else:
-                if User.objects.filter(email=email).exists():
-                    # messages.error(request,'This email is being used')
-                    return redirect('accounts:register')
+            # Check username if exist
+            if User.objects.filter(email=email).exists():
+                messages.error(request,'This email is being used')
+                return redirect('accounts:register')
 
-                else:
-
-                    # looks good
-                    user = User.objects.create_user(
-                        username=username, password=password, email=email)
-                    # login after register
-                    # auth.login(request,user)
-                    # messages.success(request, 'You are now logged in')
-                    # return redirect('index')
-                    user.save()
-                    # messages.success(request, ' You are now registered')
-                    return redirect('accounts:login')
+            # looks good
+            user = User.objects.create_user(
+            username=username, password=password, email=email)
+            # login after register
+            # auth.login(request,user)
+            # messages.success(request, 'You are now logged in')
+            # return redirect('index')
+            user.save()
+            # messages.success(request, ' You are now registered')
+            return redirect('accounts:login')
 
         else:
             messages.error(request, 'Passwords do not match')
@@ -150,6 +157,9 @@ def change_profile_settings(request):
 
 def follow(request):
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request,"You have to login")
+            return redirect('accounts:login')
         user = request.user
 
         follow_id = request.POST['user_id']
@@ -157,16 +167,23 @@ def follow(request):
         if not Follows.objects.filter(follower=user, followed=followed_user).exists() and follow_id != followed_user:
             follow = Follows(follower=user, followed=followed_user)
             follow.save()
-    return redirect('accounts:dashboard',followed_user.id)
+        return redirect('accounts:dashboard',followed_user.id)
+    else:
+        return redirect('accounts:login')
 
 
 
 def unfollow(request):
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request,"You have to login")
+            return redirect('accounts:login')
         user = request.user
 
         unfollow_id = request.POST['user_id']
         unfollowed_user = CustomUser.objects.get(pk=unfollow_id)
         Follows.objects.get(follower=user,followed=unfollowed_user).delete()
 
-    return redirect('accounts:dashboard',unfollowed_user.id)
+        return redirect('accounts:dashboard',unfollowed_user.id)
+    else:
+        return redirect('accounts:login')

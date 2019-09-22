@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
     blogname = models.CharField(max_length=30, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     about = models.TextField(null=True, blank=True)
-    photo = models.ImageField(upload_to=upload_to, null=True, blank=True,default="https://www.eguardtech.com/wp-content/uploads/2018/08/Network-Profile.png")
+    photo = models.ImageField(upload_to=upload_to, null=True, blank=True,default="defaults/avatar.png")
 
     def __str__(self):
         return self.email

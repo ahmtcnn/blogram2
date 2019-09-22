@@ -5,6 +5,15 @@ from accounts.models import CustomUser
 
 # Create your models here.
 
+choices_test = CHOICES= (
+('sport', 'Sport'),
+('social', 'Social'),
+('science', 'Science'),
+('cyber security', 'Cyber Security'),
+('health', 'Health'),
+('political', 'Political'),
+('magazin', 'Magazin'),
+)
 
 def upload_to(instance, filename):
     return 'articles/%s/%s' % (instance.title, filename)
@@ -19,11 +28,12 @@ class Article(models.Model):
     publish_date = models.DateField(auto_now_add=True)
     like_count = models.IntegerField(default=0)
     dislike_count = models.IntegerField(default=0)
+    related_area = models.CharField(max_length=25, choices=choices_test,null=True)
     is_edited = models.BooleanField(default=False)
     last_edited = models.DateField(auto_now_add=True)
     seen_count = models.IntegerField(default=0)
     comment_count = models.IntegerField(default=0)
-    main_photo = models.ImageField(upload_to=upload_to, blank=True)
+    main_photo = models.ImageField(upload_to=upload_to, blank=True,default="defaults/backround.jpg")
     photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)

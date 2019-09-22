@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Article, Likes
 from accounts.models import CustomUser
 from django.http import JsonResponse
+from .forms import ArticleForm
 
 # Create your views here.
 
@@ -40,19 +41,19 @@ def search(request):
 def save_article(request):
     # Check if request is post
     if request.method == 'POST':
-        # Check if user is authenticated
-        if request.user.is_authenticated:
-            user_id = request.user.id
+        
+        # Get user object
+        user = request.user
 
         # Get all post variables
         title = request.POST['title']
         topic = request.POST['topic']
+        related_area         = request.POST['related_area']
         description = request.POST['description']
         article = request.POST['article']
         photo = request.FILES['main_photo']
+        
 
-        # Get user object with id
-        user = CustomUser.objects.get(id=user_id)
 
         # Create article
         article = Article(writer=user, title=title, topic=topic,
@@ -68,7 +69,6 @@ def save_article(request):
 def like(request):
     if request.method=="POST":
         if request.user.is_authenticated:
-            print("ok")
             article_id = request.POST['article_id']
             article = Article.objects.get(id=article_id)
             if not Likes.objects.filter(liker_user=request.user, liked_article=article).exists():
@@ -80,8 +80,12 @@ def like(request):
                 article.save()
                 context = {
                 "like_count":article.like_count,
-            }
-    return JsonResponse(context)
+                }
+                return JsonResponse(context)
+        else:
+            return redirect("accounts:login")
+    else:
+        return redirect('articles:index')
 
 
 def unlike(request):

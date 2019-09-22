@@ -1,7 +1,8 @@
 <div class="tab-pane" id="followed">
 
+  <ul class="list-group">
     {% for followed in followed %}
-      <li><a href = "{% url 'accounts:dashboard' followed.id %}">{{followed.username}}</a></li><br>
+      <li class="list-group-item"><a href = "{% url 'accounts:dashboard' followed.id %}">{{followed.username}}</a></li><br>
     {% endfor %}
-
+  </ul>
 </div>
