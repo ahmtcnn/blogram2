@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+#h+9o-))2k!v4+gi81^*uqyik4nnenfztxxg@z#q0$kjn^!71'
 
 # Testing dependabot. Not a real secret, got from gpt.
-AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
