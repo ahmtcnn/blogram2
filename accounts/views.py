@@ -19,8 +19,8 @@ def get_user(username):
     cursor = conn.cursor()
 
     # ❌ Vulnerable: string concatenation
-    query = f"SELECT * FROM users WHERE username = '{username}'"
-    cursor.execute(query)
+    query = "SELECT * FROM users WHERE username = ?"
+    cursor.execute(query, (username,))
 
     result = cursor.fetchall()
     conn.close()
