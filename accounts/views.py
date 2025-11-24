@@ -9,6 +9,31 @@ from upload_validator import FileTypeValidator
 from django.contrib import messages
 from .forms import AccountForm,LoginForm
 
+import sqlite3
+from flask import request, Flask
+
+app = Flask(__name__)
+
+def get_user(username):
+    conn = sqlite3.connect("test.db")
+    cursor = conn.cursor()
+
+    # ❌ Vulnerable: string concatenation
+    query = f"SELECT * FROM users WHERE username = '{username}'"
+    cursor.execute(query)
+
+    result = cursor.fetchall()
+    conn.close()
+
+    return result
+
+
+@app.route("/user")
+def user():
+    username = request.args.get("username")
+    return str(get_user(username))
+
+
 
 def dashboard(request, user_id):
     # Get visited page's user id to show his/her properties
